@@ -58,6 +58,11 @@ public class PopoverView extends RelativeLayout implements View.OnTouchListener 
         configure(context);
     }
 
+    /**
+     * Initializes all configuration params
+     *
+     * @param context Current context
+     */
     protected void configure(Context context) {
         this.context = context;
         this.setOnTouchListener(this);
@@ -65,7 +70,7 @@ public class PopoverView extends RelativeLayout implements View.OnTouchListener 
 
     /**
      * Calculates the available area for the reference Rect.
-     * The Rect is related to the parent View. So, take care of the Rect passed as parameter
+     * The Rect is related to the parent View. So, take care to the Rect passed as parameter
      * as it must be related to the parent's view.
      *
      * @param referenceRect The reference Rect in parent's View coordinate
@@ -109,6 +114,14 @@ public class PopoverView extends RelativeLayout implements View.OnTouchListener 
         return null;
     }
 
+    /**
+     * Checks in which direction has the maximum available area from the referenceRect
+     * Is uses the parent view to calculates the greater area in each direction (left, right,
+     * top and bottom)
+     *
+     * @param referenceRect The rect that will be used as reference relative to its parent
+     * @return
+     */
     protected PopoverViewPosition getAvailablePosition(Rect referenceRect) {
         ViewGroup parentView = (ViewGroup) this.getParent();
 
@@ -149,18 +162,38 @@ public class PopoverView extends RelativeLayout implements View.OnTouchListener 
         return null;
     }
 
+    /**
+     * Returns the current OnDismissListener
+     *
+     * @return
+     */
     public OnDismissListener getOnDismissListener() {
         return onDismissListener;
     }
 
+    /**
+     * Sets the OnDismissListener listener
+     *
+     * @param onDismissListener
+     */
     public void setOnDismissListener(OnDismissListener onDismissListener) {
         this.onDismissListener = onDismissListener;
     }
 
+    /**
+     * Returns the current view that is displayed inside PopoverView
+     *
+     * @return
+     */
     public View getContentView() {
         return contentView;
     }
 
+    /**
+     * Sets the content view that will be inside the PopoverView
+     *
+     * @param contentView The View that will be used
+     */
     public void setContentView(View contentView) {
         if (contentView != null) {
             if (this.contentView != null) {
@@ -179,6 +212,11 @@ public class PopoverView extends RelativeLayout implements View.OnTouchListener 
         }
     }
 
+    /**
+     * Sets the content view that will be inside the PopoverView
+     *
+     * @param resourceId Ther resource id of the view
+     */
     public void setContentView(int resourceId) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(resourceId, null);
@@ -186,6 +224,14 @@ public class PopoverView extends RelativeLayout implements View.OnTouchListener 
             setContentView(view);
     }
 
+    /**
+     * Displays the PopoverView over the referenceView.
+     *
+     * @param referenceView The view that will be used as reference for the PopoverView.
+     *                      It will be shown left, right, top or bottom of this reference View.
+     * @param position      The position that PopoverView will be displayed. Or Any if you want to set
+     *                      the position automatically
+     */
     public void show(final View referenceView, final PopoverViewPosition position) {
         if (contentView == null) return;
 
@@ -264,6 +310,9 @@ public class PopoverView extends RelativeLayout implements View.OnTouchListener 
         }
     }
 
+    /**
+     * Dismiss the current Popover view
+     */
     public void dismiss() {
         ViewGroup parentView = (ViewGroup) getParent();
         if (parentView != null)
