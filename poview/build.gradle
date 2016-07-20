@@ -22,4 +22,4 @@ dependencies {
 
 }
 
-apply from: '../maven_push.gradle'
+//apply from: '../maven_push.gradle'
